@@ -1,0 +1,15 @@
+# Global settings. Values marked TBD are locked in the phase noted in context.md.
+seed: 42
+paths:
+  raw: data/raw
+  interim: data/interim
+  processed: data/processed
+mlflow:
+  tracking_uri: file:./mlruns
+  experiment: fraud-delay-retrain
+label_delay_days: [0, 7, 30, 60]
+heldout:
+  days: TBD          # context.md open decision 3 (Phase 1)
+  env_flag: FINAL_EVAL
+budget:
+  max_retrains: TBD  # open decision 8 (Phase 2, before W7 pre-registration)

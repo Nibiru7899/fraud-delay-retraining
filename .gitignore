@@ -1,0 +1,24 @@
+# data & artifacts (never commit)
+data/**
+!data/*/
+!data/*/.gitkeep
+mlruns/
+mlartifacts/
+reports/*
+!reports/.gitkeep
+*.parquet
+*.csv
+*.zip
+*.pdf
+# env & secrets
+.venv/
+.env
+kaggle.json
+*.tfstate*
+.terraform/
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
