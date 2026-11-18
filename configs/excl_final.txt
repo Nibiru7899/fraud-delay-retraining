@@ -1,0 +1,14 @@
+pemail_cnt_1d
+pemail_amt_sum_1d
+pemail_cnt_7d
+pemail_amt_sum_7d
+pemail_cnt_30d
+pemail_amt_sum_30d
+pemail_n_prev
+pemail_amt_mean_prev
+pemail_amt_std_prev
+pemail_amt_ratio
+pemail_amt_z
+pemail_secs_since_lastcard1_secs_since_last
+uid_secs_since_last
+pemail_secs_since_last

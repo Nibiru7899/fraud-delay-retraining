@@ -3,6 +3,7 @@ data/**
 !data/*/
 !data/*/.gitkeep
 mlruns/
+mlruns.db
 mlartifacts/
 reports/*
 !reports/.gitkeep
@@ -22,3 +23,4 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 *.egg-info/
+catboost_info/
