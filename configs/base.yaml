@@ -5,11 +5,42 @@ paths:
   interim: data/interim
   processed: data/processed
 mlflow:
-  tracking_uri: file:./mlruns
+  tracking_uri: sqlite:///mlruns.db
   experiment: fraud-delay-retrain
 label_delay_days: [0, 7, 30, 60]
 heldout:
-  days: TBD          # context.md open decision 3 (Phase 1)
   env_flag: FINAL_EVAL
 budget:
   max_retrains: TBD  # open decision 8 (Phase 2, before W7 pre-registration)
+
+# Time windows in t_days (days since first row). Half-open [start, end).
+# Locked 2026-11-18, see context.md decision 3 and the LC censoring finding.
+datasets:
+  ieee:
+    path: data/interim/ieee.parquet
+    label: isFraud
+    drop_cols: [TransactionID, TransactionDT, t_days, isFraud]
+    feat_path: data/processed/ieee_feat.parquet
+    # cumulative counts since file start act as a clock (non-stationary) -> never model inputs
+    drop_feature_suffixes: [_n_prev]
+    # Final Phase-1 feature set (chosen on VALID with 3 seeds, see context.md 2026-11-18)
+    feature_set:
+      feat: v2
+      drop_raw_d: true
+      exclude: [pemail_cnt_1d, pemail_amt_sum_1d, pemail_cnt_7d, pemail_amt_sum_7d, pemail_cnt_30d, pemail_amt_sum_30d, pemail_n_prev, pemail_amt_mean_prev, pemail_amt_std_prev, pemail_amt_ratio, pemail_amt_z, pemail_secs_since_lastcard1_secs_since_last, uid_secs_since_last, pemail_secs_since_last]
+    stream: [0, 182.0001]        # full labelled train file
+    heldout_start: 154           # last 4 weeks never used for tuning
+    baseline:                    # Phase-1 static split inside dev
+      train: [0, 112]            # weeks 1-16
+      valid: [112, 133]          # weeks 17-19 (early stopping, thresholds, choices)
+      test: [133, 154]           # weeks 20-22 (reported; not used for choices)
+  lc:
+    path: data/interim/lc.parquet
+    label: Default
+    drop_cols: [id, issue_d, t_days, Default, title, desc]
+    stream_dates: ["2010-01-01", "2016-01-01"]   # later loans are censored (see context.md)
+    heldout_start_date: "2015-07-01"             # last 6 months
+
+# Week-4 business metric: analyst review cost per flagged transaction (assumption, USD).
+# Main value 10; 5 and 20 are the sensitivity check.
+review_cost_usd: [5, 10, 20]

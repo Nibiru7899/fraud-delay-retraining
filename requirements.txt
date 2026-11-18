@@ -5,11 +5,13 @@ pyarrow==26.0.1
 scipy==1.18.1
 scikit-learn==1.9.1
 lightgbm==4.7.0
+catboost==1.2.10
 imbalanced-learn==0.14.2
 torch==2.15.0
 pandera==0.36.0
 river==0.27.0
 mlflow==3.18.0
+optuna==5.1.0
 PyYAML==6.0.3
 kaggle==2.2.5
 pytest==9.2.0

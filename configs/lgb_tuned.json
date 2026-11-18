@@ -1,0 +1,23 @@
+{
+  "params": {
+    "num_leaves": 407,
+    "min_child_samples": 48,
+    "feature_fraction": 0.7175549116941793,
+    "bagging_fraction": 0.9454600147773083,
+    "lambda_l2": 0.002802858783315501,
+    "lambda_l1": 0.002998183653344202,
+    "max_bin": 255,
+    "cat_smooth": 1.7355461230064206
+  },
+  "mean_pr_auc": 0.6720645602473799,
+  "fold_pr_auc": [
+    0.6346,
+    0.7095
+  ],
+  "iters": [
+    926,
+    916
+  ],
+  "default_trial": 0.6535967051126881,
+  "n_trials": 25
+}

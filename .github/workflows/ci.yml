@@ -12,3 +12,14 @@ jobs:
       - run: pip install -r requirements.txt -e .
       - run: ruff check src tests scripts
       - run: pytest
+  terraform:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: infra/terraform
+    steps:
+      - uses: actions/checkout@v5
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform fmt -check -recursive
+      - run: terraform init -backend=false
+      - run: terraform validate
